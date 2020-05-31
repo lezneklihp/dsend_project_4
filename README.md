@@ -7,17 +7,41 @@
 - [Acknowledgements & licensing](#Acknowledgements)
 
 ## Project motivation:<a name="Motivation"></a>
-TODO
+background: domain, origin, related data sets
 
 ## Project summary:<a name="Summary"></a>
 TODO
-- Definition
+- Definition: "Problem statement" Problem which needs to be solved. A strategy for solving the problem & discussion of the expected solution. "Metrics" Metrics for model performance; Metrics based on problem characteristics.
+
+Imbalanced classification problem. How can the health condition of trees be objectively categorized. F-1 score for each health condition.
+
 - Analysis
+
+Steps taken:
+ 1. EDA: Imbalanced classes.
+ Data description about NaN values. No duplicate data. Answers to descriptive questions.
+ 
+ 2. Feature Engineering:
+ New feature. One-hot encoding.
+
+3. Modelling:
+ Oversampling. Experimenting with XGBClassifier, LGBMClassifier, & MLPClassifier; Hyperparameter Optimization. Time consuming process. Testing with optimized models.
+ 
+ -> Robustness of the model? Discuss the parameters. 
+ 
+ 4. Voila web application
+
 - Summary of results
+Justify the results (used various approach to sampling but none of them proved to be more effective than oversampling.
+
 - Conclusion
+Reflect on the solution. Difficult or interesting aspects of the project.
+
+Improvement: smoother app usage. Other algorithms such as RandomForestClassifier. Make the app less location dependent.
+
 
 ## Repository content:<a name="Repository_content"></a>
-TODO
+TODO: short description of each file.
 
 ```bash
 .
