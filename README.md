@@ -9,6 +9,8 @@
 ## Project motivation:<a name="Motivation"></a>
 background: domain, origin, related data sets
 
+Think of trees in urban areas and you will point to trees in parks, along riverbanks, or in backyards. Have you also thought about street trees? 
+
 ## Project summary:<a name="Summary"></a>
 TODO
 - Definition: "Problem statement" Problem which needs to be solved. A strategy for solving the problem & discussion of the expected solution. "Metrics" Metrics for model performance; Metrics based on problem characteristics.
