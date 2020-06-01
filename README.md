@@ -29,7 +29,19 @@ Steps taken:
 3. Modelling:
  Oversampling. Experimenting with XGBClassifier, LGBMClassifier, & MLPClassifier; Hyperparameter Optimization. Time consuming process. Testing with optimized models.
  
- -> Robustness of the model? Discuss the parameters. 
+  "n F-measure is the harmonic mean of the precision and recall scores, and provides a more robust overall metric of your results." source 3, p182 (naturallanguageannotationformachinelearning)
+ 
+ -> Robustness of the model? Discuss the parameters.
+ "In statistics, robust is a property that is used to describe a resilience to outliers. More generally, the term robust statistics refers to statistics that are not strongly affected by certain degrees of departures from model assumptions." source (2) p. 111 (machinelearningandsecurity)
+ 
+ Example: "The algorithm’s performance is relatively robust to the setting of alpha, meaning that setting alpha is not critical for good performance. "
+ o reproducible result given a fixed random_state
+ MLPClassifier
+ o neural networks are sensitive to the choice of parameters ->source, p.130 (introductiontomachinelearningwithpython)
+ o "lbfgs', which is quite robust" ->source 2, p.120 (introductiontomachinelearningwithpython)
+ o "SGD is also a popular algorithm for training neural networks due to its robustness in the face of noisy updates. That is, it helps you build models that gen‐ eralize well." --> source 4, p. 98 (deeplearning)
+ 
+ A more appropriate strategy to properly estimate model prediction performance is to use cross-validation (CV), which combines (e.g., averages) multiple prediction errors to measure the expected model performance. CV corrects for the expected stochastic nature of partitioning the training and testing sets and generates a more accurate and robust estimate of the expected model performance. --> source 5, p. 701 (2018_Book_DataScienceAndPredictiveAnalyt)
  
  4. Voila web application
 
