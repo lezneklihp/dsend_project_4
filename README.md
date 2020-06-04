@@ -72,9 +72,11 @@ Fiona==1.8.13,
 GDAL==3.0.4,
 geopandas==0.6.3,
 geopy==1.21.0,
+imbalanced-learn==0.6.2,
 ipympl==0.5.6,
 ipywidgets==7.5.1,
 joblib==0.14.1,
+lightgbm==2.3.1,
 matplotlib==3.2.0,
 notebook==6.0.2,
 numpy==1.18.1,
@@ -85,7 +87,8 @@ Rtree==0.9.3,
 scikit-learn==0.22,
 seaborn==0.9.0,
 Shapely==1.7.0,
-voila==0.1.21
+voila==0.1.21,
+xgboost==1.1.0
 ```
 
 I used [pip](https://pip.pypa.io/en/stable/) to install these packages.
