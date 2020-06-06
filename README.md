@@ -48,11 +48,17 @@ With regard to the final hyperparameters, let me elaborate on the robustness of 
 
 ### 4. Step: Voila Web Application
 
-In the last step, I wanted to try the use of [Voilà](https://github.com/voila-dashboards/voila) and interactive widgets in my modelling Jupyter notebook. The Voilà app included two features. The first feature, "Tree Map", had to map New York City's boroughs, streets, and street trees. This map should also allow for filtering trees for their health condition and refresh itself if, for example, a user wanted to clear previous choices. Figure 0 shows the current version's Tree Map.
+In the last step, I wanted to try the use of [Voilà](https://github.com/voila-dashboards/voila) and interactive widgets in my modelling Jupyter notebook. The Voilà app included two features based on requirements which I had set myself. Note that these features might neither be novelties nor copies, as there are already a [New York City Street Tree Map](https://tree-map.nycgovparks.org/tree-map/) by the New York City Department of Parks & Recreation itself and several other projects on the NYC street tree data following a [hackathon](https://treescountdatajam.devpost.com/) in 2016 sponsored by the same department.
+
+The first feature, "Tree Map", had to map New York City's boroughs, streets, and street trees. This map should also allow for filtering trees for their health condition and refresh itself if, for example, a user wanted to clear previous choices. Figure 0 shows the current version's Tree Map.
 
 **Figure 0: Tree Map**
 
 ![Tree Map](/images/feature_streettreemap.PNG)
+
+The second feature, "Street Tree Questionnaire", had to offer dropdowns as answer options to questions resembling the original data gathering process by the New York Street Tree Census.
+
+
 
  
   "n F-measure is the harmonic mean of the precision and recall scores, and provides a more robust overall metric of your results." source 3, p182 (naturallanguageannotationformachinelearning)
