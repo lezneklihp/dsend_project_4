@@ -27,9 +27,14 @@ Steps taken:
  New feature. One-hot encoding.
 
 **3. Step: Modelling**
-After loading the preprocessed data, I checked the distribution of the targets. Given the class imbalance of the targets, I decided to split the modelling step into two phases of trying out several classifiers and evaluating those experiments with the F1 score.
+After loading the preprocessed data, I checked the distribution of the targets. Given the class imbalance of the targets, I decided to split the modelling step into two phases of trying out several classifiers and evaluating those experiments with the F1 score. In case of similar F1 scores, I would further take the AUC (area under the curve) in terms of the average precision score into account.
 
-In the first phase, I experimented with different data sampling strategies and their effect on test model runs (i.e., using various classifiers with their default parameter settings). I applied oversampling (a bootstrapping approach) of the imblearn package on the training datasets. As the oversampling approach did not fully balance all target classes, I additionally tested - among other techniques - the use of SMOTE (synthetic minority over sampling) on the already oversampled training datasets. This did not improve the F1 scores of my test models further. In the end, the use of oversampling alone yielded the highest average of all F1 scores.
+In the first phase, I experimented with different data sampling strategies and their effect on test model runs (i.e., using various classifiers with their default parameter settings). I applied oversampling (a bootstrapping approach) of the imblearn package on the training datasets (see figure).
+
+**Figure**
+![Oversampling](/images/sampling_oversampling.png)
+
+As the oversampling approach did not fully balance all target classes, I additionally tested - among other techniques - the use of SMOTE (synthetic minority over sampling) on the already oversampled training datasets. This did not improve the F1 scores of my test models further. In the end, the use of oversampling alone yielded the highest average of all F1 scores.
 
 In the second phase, I chose those classifiers which had the highest F1 scores for an optimization of the respective hyperparameter settings. More specifically, I applied a sevenfold cross-validated grid-search on the parameters of the LGBMClassifier, the RandomForestClassifier, and the MLPClassifier (a basic neural network) and measured the results again with the F1 score. I used small adjustments, to the left and right of each parameter, to arrive at the best performing settings. Once I had tuned these three classifiers, I ran a test run with the validation dataset (i.e, previously untouched data) to decide on a classifier.
 
@@ -59,6 +64,9 @@ Reflect on the solution. Difficult or interesting aspects of the project.
 
 Improvement: 
  - The dataset has been one-hot encoded without taking multicollinearity into account. If I had set pandas.get_dummies(drop_first=True), I would have one the one hand avoided multicollinearity. On the other hand, the accuracy of my model would have decreases (as test runs have shown) and I would have had far less features for the modelling step (even though these features are being generated through data that is gathered in the tree surveys anyways.) It can be argued though, if the issue of multicollinearity is relevant to a decision tree or a gradient boosting classifier anyways.
+ 
+ - I could have chosen another classifier and with the SMOTE data sampling technique.
+ 
  - smoother app usage. Other algorithms such as RandomForestClassifier. Make the app less location dependent.
 
 
