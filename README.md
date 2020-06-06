@@ -26,7 +26,8 @@ Steps taken:
  2. Feature Engineering:
  New feature. One-hot encoding.
 
-**3. Step: Modelling**
+### 3. Step: Modelling
+
 After loading the preprocessed data, I checked the distribution of the targets (see figure).
 
 **Figure**
@@ -45,7 +46,8 @@ As the oversampling approach did not fully balance all target classes, I additio
 
 In the second phase, I chose those classifiers which were among both the three highest F1 scores and average precision scores for an optimization of the respective hyperparameter settings. More specifically, I then applied a sevenfold cross-validated grid-search on the parameters of the LGBMClassifier and the RandomForestClassifier and measured the results with the F1 score. I used small adjustments, to the left and right of each parameter, to arrive at the best performing settings. Once I had tuned these two classifiers, I ran a test run with the validation dataset (i.e, previously untouched data) to decide on a classifier. I finally chose the LGBMClassifier which had both the highest F1 and average precision scores.
 
-Experimenting with XGBClassifier, LGBMClassifier, & MLPClassifier; Hyperparameter Optimization. Time consuming process. Testing with optimized models.
+
+Time consuming process. Testing with optimized models.
  
   "n F-measure is the harmonic mean of the precision and recall scores, and provides a more robust overall metric of your results." source 3, p182 (naturallanguageannotationformachinelearning)
  
@@ -68,6 +70,8 @@ Justify the results (used various approach to sampling but none of them proved t
 
 - Conclusion
 Reflect on the solution. Difficult or interesting aspects of the project.
+
+ Time consuming experimentation with various sampling techniques, algorithms and hyperparameter tuning.
 
 Improvement: 
  - The dataset has been one-hot encoded without taking multicollinearity into account. If I had set pandas.get_dummies(drop_first=True), I would have one the one hand avoided multicollinearity. On the other hand, the accuracy of my model would have decreases (as test runs have shown) and I would have had far less features for the modelling step (even though these features are being generated through data that is gathered in the tree surveys anyways.) It can be argued though, if the issue of multicollinearity is relevant to a decision tree or a gradient boosting classifier anyways.
