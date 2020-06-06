@@ -50,7 +50,7 @@ With regard to the final hyperparameters, let me elaborate on the robustness of 
 
 In the last step, I wanted to try the use of [Voilà](https://github.com/voila-dashboards/voila) and interactive widgets in my modelling Jupyter notebook. The Voilà app included two features based on requirements which I had set myself. Note that these features might neither be novelties nor copies, as there are already a [New York City Street Tree Map](https://tree-map.nycgovparks.org/tree-map/) by the New York City Department of Parks & Recreation itself and several other projects on the NYC street tree data following a [hackathon](https://treescountdatajam.devpost.com/) in 2016 sponsored by the same department.
 
-The first feature, "Tree Map", had to map New York City's boroughs, streets, and street trees. This map should also allow for filtering trees for their health condition and refresh itself if, for example, a user wanted to clear previous choices. Figure 0 shows the current version's Tree Map.
+The first feature, "Tree Map", had to map New York City's boroughs, streets, and street trees. The main idea of the map is to show & filter for the (good, fair, or bad) health condition of street trees. This map also refreshes itself if a user wants to clear previous choices by selecting "All street trees". Figure 0 displays the current version's Tree Map.
 
 **Figure 0: Tree Map**
 
