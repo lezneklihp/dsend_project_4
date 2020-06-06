@@ -40,7 +40,7 @@ In the first phase, I experimented with different data sampling strategies and t
 
 **Figure**
 
-![Oversampling](/sampling_oversampling.png)
+![Oversampling](/sampling_oversampled.png)
 
 As the oversampling approach did not fully balance all target classes, I additionally tested - among other techniques - the use of SMOTE (synthetic minority over sampling) on the already oversampled training datasets. This did not improve the F1 scores of my test models further. In the end, the use of oversampling alone yielded the highest average of all F1 scores.
 
