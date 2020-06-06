@@ -11,7 +11,7 @@ background: domain, origin, related data sets
 
 Think of trees in urban areas and you will imagine trees in parks, along riverbanks, or in backyards. Have you also thought about street trees? 
 
-## Project summary:<a name="Summary"></a>
+## Project summary<a name="Summary"></a>
 TODO
 - Definition: "Problem statement" Problem which needs to be solved. A strategy for solving the problem & discussion of the expected solution. "Metrics" Metrics for model performance; Metrics based on problem characteristics.
 
@@ -52,14 +52,18 @@ In the last step, I wanted to try the use of [Voilà](https://github.com/voila-d
 
 The first feature, "Tree Map", had to map New York City's boroughs, streets, and street trees. The main idea of the map is to show & filter for the (good, fair, or bad) health condition of street trees. This map also refreshes itself if a user wants to clear previous choices by selecting "All street trees". Figure 0 displays the current version's Tree Map.
 
-**Figure 0: Tree Map**
+**Figure 0: Street Tree Map**
 
 ![Tree Map](/images/feature_streettreemap.PNG)
 
-The second feature, "Street Tree Questionnaire", had to offer dropdowns as answer options to questions resembling the original data gathering process by the New York Street Tree Census.
+The second feature, "Street Tree Questionnaire", had to offer answer options in drop-down menus to questions resembling the original data gathering process of the New York Street Tree Census. Figure 0 shows the questions, drop-down lists, and a reset button on the left. On the right, an output message is generated depending on the answers. For example, the Voilà app will return the statement `This tree is healthy.` if the LGBMClassifier classifies the tree condition based on the characteristics of the tree to be healthy.
 
+**Figure 0: Street Tree Questionnaire**
 
+![Tree Map](/images/feature_streettreequest.PNG)
 
+### Project summary: Results
+ 
  
   "n F-measure is the harmonic mean of the precision and recall scores, and provides a more robust overall metric of your results." source 3, p182 (naturallanguageannotationformachinelearning)
  
