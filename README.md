@@ -32,13 +32,13 @@ After loading the preprocessed data, I checked the distribution of the targets (
 
 **Figure 0: Distribution of Targets**
 
-![Distribution](/sampling_none.png)
+![Distribution](/images/sampling_none.png)
 
 In the first phase, I experimented with different data sampling strategies and their effect on test model runs (i.e., using various classifiers with their default parameter settings). I applied oversampling (a bootstrapping approach) of the imblearn package on the training datasets (see figure).
 
 **Figure 0: Distribution of Oversampled Targets**
 
-![Oversampling](/sampling_oversampled.png)
+![Oversampling](/images/sampling_oversampled.png)
 
 As the oversampling approach did not fully balance all target classes, I additionally tested - among other techniques - the use of SMOTE (synthetic minority over sampling) on the already oversampled training datasets. This did not improve the F1 scores of my test models further. In the end, the use of oversampling alone yielded the highest average of all F1 scores.
 
@@ -48,7 +48,11 @@ With regard to the final hyperparameters, let me elaborate on the robustness of 
 
 ### 4. Step: Voila Web Application
 
-In the last step, I wanted to try the use of [Voilà](https://github.com/voila-dashboards/voila) and interactive widgets in my modelling Jupyter notebook. The Voilà app included two features. It first had to map New York City's boroughs, streets, and street trees. The map should allow for filtering trees for their health condition and refresh itself if, for example, a user wanted to clear this map.
+In the last step, I wanted to try the use of [Voilà](https://github.com/voila-dashboards/voila) and interactive widgets in my modelling Jupyter notebook. The Voilà app included two features. The first feature, "Tree Map", had to map New York City's boroughs, streets, and street trees. This map should also allow for filtering trees for their health condition and refresh itself if, for example, a user wanted to clear previous choices. Figure 0 shows the current version's Tree Map.
+
+**Figure 0: Tree Map**
+
+![Tree Map](/images/features_streettreemap.png)
 
  
   "n F-measure is the harmonic mean of the precision and recall scores, and provides a more robust overall metric of your results." source 3, p182 (naturallanguageannotationformachinelearning)
