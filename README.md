@@ -51,7 +51,9 @@ Justify the results (used various approach to sampling but none of them proved t
 - Conclusion
 Reflect on the solution. Difficult or interesting aspects of the project.
 
-Improvement: smoother app usage. Other algorithms such as RandomForestClassifier. Make the app less location dependent.
+Improvement: 
+ - The dataset has been one-hot encoded without taking multicollinearity into account. If I had set pandas.get_dummies(drop_first=True), I would have one the one hand avoided multicollinearity. On the other hand, the accuracy of my model would have decreases (as test runs have shown) and I would have had far less features for the modelling step (even though these features are being generated through data that is gathered in the tree surveys anyways.)
+ - smoother app usage. Other algorithms such as RandomForestClassifier. Make the app less location dependent.
 
 
 ## Repository content:<a name="Repository_content"></a>
