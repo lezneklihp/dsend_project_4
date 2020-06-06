@@ -19,7 +19,7 @@ But sometimes classifying trees by their appearance can turn out to be tricky. O
 
 ![Example_tree](/images/example_streettree.jpeg)
 
-If you did the short self-experiment with others as well, you will have noticed people can have different judgements for the same tree.
+The tree as such looks healthy. But those wires cutting through the tree crown.. If you did the short self-experiment with others as well, you will have noticed people can have different judgements for the same tree.
 
 ## Project summary<a name="Summary"></a>
 TODO
