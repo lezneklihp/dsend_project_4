@@ -60,7 +60,11 @@ The second feature, "Street Tree Questionnaire", had to offer answer options in 
 
 **Figure 0: Street Tree Questionnaire**
 
-![Tree Map](/images/feature_streettreequest.PNG)
+![Tree Quest](/images/feature_streettreequest.PNG)
+
+**Figure 0: Street Tree Questionnaire in action**
+
+![Tree Quest action](/images/feature_streettreequest_giffed.gif)
 
 ### Project summary: Results
  
