@@ -9,7 +9,17 @@
 ## Project motivation:<a name="Motivation"></a>
 background: domain, origin, related data sets
 
-Think of trees in urban areas and you will imagine trees in parks, along riverbanks, or in backyards. Have you also thought about street trees? 
+Think of trees in urban areas and you might imagine trees in parks, along riverbanks, or in backyards. But have you also thought about street trees? This project is all about them. I stumbled upon this topic searching for a dataset on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data). The City of New York has made there its data on street trees of NYC publicy available. After some research I discovered that data science has arrived to urban decision-making as well.
+
+The idea of this project is to classify trees, given the information on their appearance. In the tree census data, this information is available in the field 'health status'. When the data had been collected, every volunteer gave his judgement whether a tree is in a poor, fair, or good condition - or might be even dead / a stump at all.
+
+But sometimes classifying trees by their appearance can turn out to be tricky. Or how would you judge the health condition of this street tree (see figure 1)?
+
+**Figure 1: A street tree**
+
+![Example_tree](/images/example_streettree.jpeg)
+
+If you did the short self-experiment with others as well, you will have noticed people can have different judgements for the same tree.
 
 ## Project summary<a name="Summary"></a>
 TODO
@@ -149,4 +159,5 @@ voila <name.ipynb> --ExecutePreprocessor.timeout=180
 Your Internet browser should open now. Otherwise follow the instructions in your terminal.
 
 ## Acknowledgements, licensing & sources:<a name="Acknowledgements"></a>
-TODO
+
+The data of the TreesCount! 2015 Street Tree Census is licensed under `CC0: Public Domain`. See further information on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data).
