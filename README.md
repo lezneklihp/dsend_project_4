@@ -52,7 +52,7 @@ In the last step, I wanted to try the use of [Voilà](https://github.com/voila-d
 
 **Figure 0: Tree Map**
 
-![Tree Map](/images/features_streettreemap.png)
+![Tree Map](/images/feature_streettreemap.png)
 
  
   "n F-measure is the harmonic mean of the precision and recall scores, and provides a more robust overall metric of your results." source 3, p182 (naturallanguageannotationformachinelearning)
