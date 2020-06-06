@@ -13,13 +13,13 @@ Think of trees in urban areas and you might imagine trees in parks, along riverb
 
 The idea of this project is to classify trees, given the information on their appearance. In the tree census data, this information is available in the field 'health status'. When the data had been collected, every volunteer gave his judgement whether a tree is in a poor, fair, or good condition - or might be even dead / a stump at all.
 
-But sometimes classifying trees by their appearance can turn out to be tricky. Or how would you judge the health condition of this street tree (see figure 1)?
+But classifying trees by their appearance can become tricky. Or how would you judge the health of this street tree (see figure 1)?
 
 **Figure 1: A street tree**
 
 ![Example_tree](/images/example_streettree.jpeg)
 
-The tree as such looks healthy. But those wires cutting through the tree crown.. If you did the short self-experiment with others as well, you will have noticed people can have different judgements for the same tree.
+The tree as such looks healthy. But those wires cutting through the tree crown.. If you did this short self-experiment with others as well, you will have noticed people can have different judgements for the same tree. City councils could in any case make use of the information of the health condition of street trees. For example, a city might decide to plant new trees in areas with many street tree stumps.
 
 ## Project summary<a name="Summary"></a>
 TODO
