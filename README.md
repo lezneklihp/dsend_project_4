@@ -32,7 +32,7 @@ After loading the preprocessed data, I checked the distribution of the targets. 
 In the first phase, I experimented with different data sampling strategies and their effect on test model runs (i.e., using various classifiers with their default parameter settings). I applied oversampling (a bootstrapping approach) of the imblearn package on the training datasets (see figure).
 
 **Figure**
-![Oversampling](/images/sampling_oversampling.png)
+![Oversampling](/sampling_oversampling.png)
 
 As the oversampling approach did not fully balance all target classes, I additionally tested - among other techniques - the use of SMOTE (synthetic minority over sampling) on the already oversampled training datasets. This did not improve the F1 scores of my test models further. In the end, the use of oversampling alone yielded the highest average of all F1 scores.
 
