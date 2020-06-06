@@ -9,7 +9,7 @@
 ## Project motivation:<a name="Motivation"></a>
 background: domain, origin, related data sets
 
-Think of trees in urban areas and you will point to trees in parks, along riverbanks, or in backyards. Have you also thought about street trees? 
+Think of trees in urban areas and you will imagine trees in parks, along riverbanks, or in backyards. Have you also thought about street trees? 
 
 ## Project summary:<a name="Summary"></a>
 TODO
@@ -30,13 +30,13 @@ Steps taken:
 
 After loading the preprocessed data, I checked the distribution of the targets (see figure). Given the class imbalance of the three targets, I decided to split the modelling step into two phases of trying out several classifiers and evaluating those experiments with the F1 score. In case of similar F1 scores, I would further take the AUC (area under the curve) in terms of the average precision score into account.
 
-**Figure**
+**Figure 0: Distribution of Targets**
 
 ![Distribution](/sampling_none.png)
 
 In the first phase, I experimented with different data sampling strategies and their effect on test model runs (i.e., using various classifiers with their default parameter settings). I applied oversampling (a bootstrapping approach) of the imblearn package on the training datasets (see figure).
 
-**Figure**
+**Figure 0: Distribution of Oversampled Targets**
 
 ![Oversampling](/sampling_oversampled.png)
 
@@ -44,14 +44,12 @@ As the oversampling approach did not fully balance all target classes, I additio
 
 In the second phase, I chose those classifiers which were among both the three highest F1 scores and average precision scores for an optimization of the respective hyperparameter settings. More specifically, I then applied a sevenfold cross-validated grid-search on the parameters of the LGBMClassifier and the RandomForestClassifier and measured the results with the F1 score. I used small adjustments, to the left and right of each parameter, to arrive at the best performing settings. Once I had tuned these two classifiers, I ran a test run with the validation dataset (i.e, previously untouched data) to decide on a classifier. I finally chose the LGBMClassifier which had both the highest F1 and average precision scores.
 
-With regard to the final hyperparameters, let me quickly elaborate on the robustness of the model. The LGBMClassifier reached a F1 score of 0.76 before the hyperparameter tuning. This metric increased to 0.85 after the grid-search on the training and testing datasets. The optimization thus clearly had an effect. I followed the official recommendations on parameters tuning 
+With regard to the final hyperparameters, let me elaborate on the robustness of the model. The LGBMClassifier reached a F1 score of 0.76 before the hyperparameter tuning. This metric increased to 0.85 after the grid-search on the training and testing datasets. The optimization thus clearly had an effect. Nonetheless, I eventually did not follow the official recommendations on [parameters tuning](https://lightgbm.readthedocs.io/en/latest/Parameters-Tuning.html) for better accuracy of the LightGBM algorithm entirely. On the one hand, I used the `boosting_type` as recommended and changed it to "dart". I also increased `num_leaves`, but did not define it too high to avoid overfitting. On the other hand, I could not find better results in lowering the `learning_rate`. I instead increased this parameter to a higher setting (= 1.0) than the default value (= 0.1). Further, I stayed at almost the default settings for the `n_estimators` and noticed only minor improvements by changing the `reg_lambda` parameter. Overall, if there is a parameter to be set in increase the performance of this model, I would argue that this has been `boosting_type='dart'`. Since I have fixed the `random_state`, feel free to reproduce my results. 
 
-http://github.com - automatic!
-[GitHub](https://lightgbm.readthedocs.io/en/latest/Parameters-Tuning.html)
+### 4. Step: Voila Web Application
 
+In the last step, I wanted to try the use of [Voilà](https://github.com/voila-dashboards/voila) and interactive widgets in my modelling Jupyter notebook. The Voilà app included two features. It first had to map New York City's boroughs, streets, and street trees. The map should allow for filtering trees for their health condition and refresh itself if, for example, a user wanted to clear this map.
 
-
-Time consuming process. Testing with optimized models.
  
   "n F-measure is the harmonic mean of the precision and recall scores, and provides a more robust overall metric of your results." source 3, p182 (naturallanguageannotationformachinelearning)
  
@@ -67,7 +65,6 @@ Time consuming process. Testing with optimized models.
  
  A more appropriate strategy to properly estimate model prediction performance is to use cross-validation (CV), which combines (e.g., averages) multiple prediction errors to measure the expected model performance. CV corrects for the expected stochastic nature of partitioning the training and testing sets and generates a more accurate and robust estimate of the expected model performance. --> source 5, p. 701 (2018_Book_DataScienceAndPredictiveAnalyt)
  
- 4. Voila web application
 
 - Summary of results
 Justify the results (used various approach to sampling but none of them proved to be more effective than oversampling.
