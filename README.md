@@ -34,19 +34,33 @@ I took the following steps.
 
 ### 1. Step: Load datasets
 
-The raw datasets included the New York Tree Census data and shapefiles of both the streets and boroughs of New York City. I pulled the Tree Census data directly via an [API of NYC Open Data](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh). Further, I converted the shapefiles of New York City to the World Geodetic System from 1984, i.e., the current standard coordinate reference system for longitudinal and latitudinal geographic data.
+The raw datasets included the New York Tree Census data and shapefiles of both the streets and boroughs of New York City. I pulled the Tree Census data directly via an [API of NYC Open Data](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh). With the description of the dataset (which I mentioned at the problem statement already) at hand, I already knew that missing data would always refer to dead trees or stumps. Hence, I replaced missing values accordingly. Further, I converted the shapefiles of New York City to the World Geodetic System from 1984, i.e., the current standard coordinate reference system for longitudinal and latitudinal geographic data.
 
 ### 2. Step: Exploratory data analysis
 
 Since the Tree Census data also offered geographical information on each street tree, I splitted the descriptive part of my analysis into a profile report and a geographical analysis of the data. 
 
-I generated a profile report of the Tree Census data with Pandas Profiling. The report indicated that there was no duplicated data. It also showed that the Tree Census data included several fields which I would not require for my analysis. I noted those fields down and focused on other fields which I wanted to understand better, including the diameter and species of street trees. With the description of the dataset (which I mentioned at the problem statement already) at hand, I already knew that missing data would always refer to dead trees or stumps. Hence, I replaced missing values accordingly.
+I generated a profile report of the Tree Census data with Pandas Profiling. The report indicated that there was no duplicated data. It also showed that the Tree Census data included several fields which I would not require for my analysis. I noted those fields down and focused on other fields which I wanted to understand better, including the diameter and species of street trees.
  
 For the geographical anaylsis I wanted answers to the following questions:
-- How many streets trees exist in New York?
-- Which street trees exist?
-- In which condition are New York's street trees?
-- Which street trees might need to be removed?
+
+**Which borough of New York has the most street trees?**
+
+![eda_q1](/images/eda_q1.png)
+
+> Queens has the most street trees.
+
+**Which borough has the most diverse street tree flora?**
+
+![eda_q1](/images/eda_q2.png)
+
+> All Queens, Brooklyn, and Bronx have equally diverse street trees. However, the other boroughs have almost the same amount of different tree species.
+
+**In which condition are most of New York's street trees?**
+
+![eda_q1](/images/eda_q3.png)
+
+> The majority of street trees in New York are healthy. The most unhealthy trees can be found in Queens.
 
 I finally dropped those columns which I considered irrelevant for answering the problem statement and saved the dataset to a new .csv file.
 
