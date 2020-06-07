@@ -26,24 +26,38 @@ The tree itself looks healthy. But the wires cutting through the tree crown seem
 
 ### Metrics
 
-From a technical perspective, this problem is a multilabel classification task on a sparse, imbalanced dataset. The dataset becomes sparse as I one-hote encode the categorical characteristics of each tree into dummy variables. Since accuracy scores on imbalanced datasets are not reliable enough, I take both precision and recall with the F-measure into account. In addition, I use the integral under the precision-recall curve (AUC) as a second metric in case the F1 score cannot help in judging the performance of a classification algorithm.
+From a technical perspective, this problem is a multilabel classification task on a sparse, imbalanced dataset. The dataset becomes sparse as I one-hote encode the categorical characteristics of each tree into dummy variables. Since accuracy scores on imbalanced datasets are not reliable enough, I take both precision and recall via the F-measure into account. In addition, I use the integral under the precision-recall curve (AUC) as a second metric in case the F1 score cannot help in judging the performance of a classification algorithm.
 
 # Analysis<a name="Analysis"></a>
 
-Imbalanced classification problem. How can the health condition of trees be objectively categorized. F-1 score for each health condition.
+I took the following steps.
 
-- Analysis
+### 1. Step: Load datasets
 
-Steps taken:
- 1. EDA: Imbalanced classes.
- Data description about NaN values. No duplicate data. Answers to descriptive questions.
+The raw datasets included the New York Tree Census data and shapefiles of both the streets and boroughs of New York City. I pulled the Tree Census data directly via an [API of NYC Open Data](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh). Further, I converted the shapefiles of New York City to the World Geodetic System from 1984, i.e., the current standard coordinate reference system for longitudinal and latitudinal geographic data.
+
+### 2. Step: Exploratory data analysis
+
+Since the Tree Census data also offered geographical information on each street tree, I splitted the descriptive part of my analysis into a profile report and a geographical analysis of the data. 
+
+I generated a profile report of the Tree Census data with Pandas Profiling. The report indicated that there was no duplicated data. It also showed that the Tree Census data included several fields which I would not require for my analysis. I noted those fields down and focused on other fields which I wanted to understand better, including the diameter and species of street trees. With the description of the dataset (which I mentioned at the problem statement already) at hand, I already knew that missing data would always refer to dead trees or stumps. Hence, I replaced missing values accordingly.
+ 
+For the geographical anaylsis I wanted answers to the following questions:
+- How many streets trees exist in New York?
+- Which street trees exist?
+- In which condition are New York's street trees?
+- Which street trees might need to be removed?
+
+I finally dropped those columns which I considered irrelevant for answering the problem statement and saved the dataset to a new .csv file.
+
+### 3. Step: Feature engineering
  
  2. Feature Engineering:
  New feature. One-hot encoding.
 
-### 3. Step: Modelling
+### 4. Step: Modelling
 
-After loading the preprocessed data, I checked the distribution of the targets (see figure). Given the class imbalance of the three targets, I decided to split the modelling step into two phases of trying out several classifiers and evaluating those experiments with the F1 score. In case of similar F1 scores, I would further take the AUC (area under the curve) in terms of the average precision score into account.
+After loading the preprocessed data, I checked the distribution of the targets (see figure). Given the class imbalance of the three targets, I decided to split the modelling step into two phases of trying out several classifiers and evaluating those experiments with the F1 score. In case of similar F1 scores, I would further take the AUC in terms of the average precision score into account.
 
 **Figure 0: Distribution of Targets**
 
