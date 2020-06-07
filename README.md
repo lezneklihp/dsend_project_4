@@ -1,17 +1,20 @@
 # Overview dsend_project_4:
-- [Project motivation](#Motivation)
-- [Project summary](#Summary)
+- [Project definition](#Definition)
+- [Analysis](#Summary)
 - [Repository content](#Repository_content)
 - [Software requirements](#Software_requirements)
 - [How to run locally](#How_to_run)
 - [Acknowledgements & licensing](#Acknowledgements)
 
-## Project motivation:<a name="Motivation"></a>
-background: domain, origin, related data sets
+# Project definition<a name="Definition"></a>
 
-Think of trees in urban areas and you might imagine trees in parks, along riverbanks, or in backyards. But have you also thought about street trees? This project is all about them. I stumbled upon this topic searching for a dataset on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data). The City of New York has made there its data on street trees of NYC publicy available. After some research I discovered that data science has arrived to urban decision-making as well.
+### Overview
 
-The idea of this project is to classify trees, given the information on their appearance. In the tree census data, this information is available in the field 'health status'. When the data had been collected, every volunteer gave his judgement whether a tree is in a poor, fair, or good condition - or might be even dead / a stump at all.
+Think of trees in urban areas and you might imagine trees in parks, along riverbanks, or in backyards. But have you also thought about street trees? This project is all about them. I stumbled upon this topic searching for a dataset on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data). The City of New York has made there its Tree Census data on street trees of NYC publicy available. The domain of this topic is thus data science in the context of urban decision-making.
+
+### Problem statement
+
+The idea of this project is to classify trees, given the characteristics of their appearance. In the tree census data, this information is available in the field 'health' which "indicates the user's perception of tree health" (see description in the document in ./data_descriptions/nyctreecensus_2015_description.pdf'. In other words, when this data had been collected every volunteer gave her judgement whether a tree is in a poor, fair, or good condition - or whether a street tree might be even dead / a stump at all.
 
 But classifying trees by their appearance can become tricky. Or how would you judge the health of this street tree (see figure 1)?
 
@@ -19,11 +22,13 @@ But classifying trees by their appearance can become tricky. Or how would you ju
 
 ![Example_tree](/images/example_streettree.jpeg)
 
-The tree as such looks healthy. But those wires cutting through the tree crown.. If you did this short self-experiment with others as well, you will have noticed people can have different judgements for the same tree. City councils could in any case make use of the information of the health condition of street trees. For example, a city might decide to plant new trees in areas with many street tree stumps.
+The tree itself looks healthy. But the wires cutting through the tree crown seem to impede its development. If you did this short self-experiment with others as well, you will have noticed people can perceive the same tree differently. Yet city councils could make use of an objective assessment whether a street tree is in a good or bad health condition. For example, a city might decide to plant new trees in areas with many street tree stumps. Such an objective assessment could be offered through a classification system based on machine learning. It would take the information on the characteristics of each tree, as provided by the Tree Census data, learn which health condition has been associated with which of these characterstics, and finally classify each street tree either as a tree in a good, fair, or bad health condition.
 
-## Project summary<a name="Summary"></a>
-TODO
-- Definition: "Problem statement" Problem which needs to be solved. A strategy for solving the problem & discussion of the expected solution. "Metrics" Metrics for model performance; Metrics based on problem characteristics.
+### Metrics
+
+From a technical perspective, this problem is a multilabel classification task on a sparse, imbalanced dataset. The dataset becomes sparse as I one-hote encode the categorical characteristics of each tree into dummy variables. Since accuracy scores on imbalanced datasets are not reliable enough, I take both precision and recall with the F-measure into account. In addition, I use the integral under the precision-recall curve (AUC) as a second metric in case the F1 score cannot help in judging the performance of a classification algorithm.
+
+# Analysis<a name="Analysis"></a>
 
 Imbalanced classification problem. How can the health condition of trees be objectively categorized. F-1 score for each health condition.
 
