@@ -34,7 +34,7 @@ To help you understand why and how I made use of these metrics, let me describe 
 
 ### 1. Step: Load datasets
 
-The raw datasets included publicly available data from the New York Tree Census and shapefiles of both the [streets](https://data.cityofnewyork.us/City-Government/NYC-Street-Centerline-CSCL-/exjm-f27b) and [boroughs](https://geodata.lib.berkeley.edu/catalog/nyu-2451-34490) of New York City. I pulled the Tree Census data directly via an [API of NYC Open Data](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh). Further, I converted the shapefiles of New York City to the World Geodetic System from 1984, i.e., the current standard coordinate reference system for longitudinal and latitudinal geographic data.
+The raw datasets included publicly available data from the New York Tree Census and shapefiles of both the boroughs (available via GeoPandas) and the [streets](https://data.cityofnewyork.us/City-Government/NYC-Street-Centerline-CSCL-/exjm-f27b) of New York City. I pulled the Tree Census data directly via an [API of NYC Open Data](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh). Further, I converted the shapefiles of New York City to the World Geodetic System from 1984, i.e., the current standard coordinate reference system for longitudinal and latitudinal geographic data.
 
 ### 2. Step: Exploratory data analysis
 
