@@ -92,19 +92,13 @@ If I had deleted features at this point (e.g., via `pd.get_dummies(df_sel, drop_
 
 ### 4. Step: Modelling
 
-After loading the preprocessed data, I checked the distribution of the targets (see figure 8). Given the class imbalance of the three targets, I decided to split the modelling step into two phases of trying out several classifiers and evaluating those experiments with the F1 score. In case of similar F1 scores, I would further take the AUC in terms of the average precision score into account.
+After loading the preprocessed data, I checked the distribution of the targets (see top three plots of figure 8). Given the class imbalance of the three targets, I decided to split the modelling step into two phases of trying out several classifiers and evaluating those experiments with the F1 score. In case of similar F1 scores, I would further take the AUC in terms of the average precision score into account.
 
 **Figure 8: Distribution of Targets**
 
-![Distribution](/images/sampling_none.png)
+![Distribution](/images/sampling.png)
 
-In the first phase, I experimented with different data sampling strategies and their effect on test model runs (i.e., using various classifiers with their default parameter settings). I initially applied oversampling (a bootstrapping approach) of the imblearn package on the training datasets (see figure 9).
-
-**Figure 9: Distribution of Oversampled Targets**
-
-![Oversampling](/images/sampling_oversampled.png)
-
-As the oversampling approach did not fully balance all target classes, I additionally tested - among other techniques - the use of SMOTE (synthetic minority over sampling) on the already oversampled training datasets. This did not improve the F1 scores of my test models further. In the end, the use of oversampling alone yielded the highest average of all F1 scores.
+In the first phase, I experimented with different data sampling strategies and their effect on test model runs (i.e., using various classifiers with their default parameter settings). I initially applied oversampling (a bootstrapping approach) of the imblearn package on the training datasets (see bottom three plots of figure 8). As the oversampling approach did not fully balance all target classes, I additionally tested - among other techniques - the use of SMOTE (synthetic minority over sampling) on the already oversampled training datasets. This did not improve the F1 scores of my test models further. In the end, the use of oversampling alone yielded the highest average of all F1 scores.
 
 In the second phase, I chose those classifiers which were among both the three highest F1 scores and average precision scores for an optimization of the respective hyperparameter settings. More specifically, I then applied a grid-search on the parameters of the LGBMClassifier and the RandomForestClassifier with a sevenfold cross-validation and measured the results with the F1 score. I used small adjustments, to the left and right of each parameter, to arrive at the best performing settings. Once I had tuned these two classifiers, I conducted a test run with the validation dataset (i.e., previously untouched data) to decide on a classifier. I finally chose the LGBMClassifier which had both the highest F1 and average precision scores.
 
