@@ -1,6 +1,7 @@
 # Overview dsend_project_4:
 - [Project definition](#Definition)
-- [Analysis](#Summary)
+- [Project analysis](#Analysis)
+- [Project conclusion](#Conclusion)
 - [Repository content](#Repository_content)
 - [Software requirements](#Software_requirements)
 - [How to run locally](#How_to_run)
@@ -8,9 +9,9 @@
 
 # Project definition<a name="Definition"></a>
 
-### Overview
+### Overview & motivation
 
-Think of trees in urban areas and you might imagine trees in parks, along riverbanks, or in backyards. But have you also thought about street trees? This project is all about them. I stumbled upon this topic searching for a dataset on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data). The City of New York has made there its Tree Census 2015 data on street trees of NYC publicy available. The topic domain is thus data science in the context of urban decision-making.
+Think of trees in urban areas and you might imagine trees in parks, along riverbanks, or in backyards. But have you also thought about street trees? This project is all about them. I stumbled upon this topic searching for a dataset on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data). The City of New York has made there its Tree Census 2015 data on street trees of NYC publicy available. The topic domain is thus data science in the context of urban decision-making - a field for creating insights with a potential effect on everyday life.
 
 ### Problem statement
 
@@ -26,9 +27,9 @@ The tree itself looks healthy. But the wires cutting through the tree crown seem
 
 ### Metrics
 
-From a technical perspective, this problem is a multilabel classification task on a sparse, imbalanced dataset. The dataset becomes sparse as I one-hote encode the categorical characteristics of each tree into dummy variables. Since accuracy scores on imbalanced datasets are not reliable enough, I take both precision and recall via the F-measure into account. In addition, I use the integral under the precision-recall curve (AUC) as a second metric in case the F1 score cannot help in judging the performance of an algorithm.
+From a technical perspective, this problem is a multilabel classification task on a sparse, imbalanced dataset. The dataset becomes sparse as I one-hote encode the categorical characteristics of each tree into dummy variables. Since accuracy scores on imbalanced datasets are not reliable enough, I take both precision and recall via the F-measure into account. The F1 score provides insight into both how precise classifications are and how many of those classifications have been correct. In addition, I use the integral under the precision-recall curve (AUC) as a second metric in case the F1 score cannot help in judging the performance of multiple algorithms.
 
-# Analysis<a name="Analysis"></a>
+# Project analysis<a name="Analysis"></a>
 
 To help you understand why and how I made use of these metrics, let me describe the steps I took.
 
@@ -46,7 +47,7 @@ I generated the [profile report](/eda_trees_report.html) with Pandas Profiling. 
 
 ![Eda_classimba](/images/eda_classimba.png)
 
-Moreover, the report pointed to missing values. With the [description of the dataset](/data_descriptions/nyctreecensus_2015_description.pdf), I could conclude that missing values always referred to dead trees or stumps. Before replacing these missing values, I investigated specific fields which were not covered by the profile report in depth, including the diameter and species of street trees. Afterwards I noted all fields down which I wanted to process further as features.
+Moreover, the report pointed to missing values. With the [description of the dataset](/data_descriptions/nyctreecensus_2015_description.pdf), I could conclude that missing values always referred to dead trees or stumps. Before replacing these missing values, I investigated specific fields which were not covered by the profile report in depth, including the diameter and species of street trees. Afterwards I noted all fields down which I wanted to process further as features. These features were all categorical and described visual characteristics of street trees, such as damaged trunks or wires wrapped around branches.
  
 For the geographical anaylsis I answered the following questions:
 
@@ -68,7 +69,7 @@ For the geographical anaylsis I answered the following questions:
 
 > The majority of street trees in New York are healthy. The most unhealthy trees (i.e., trees with a poor or fair health condition or dead trees or stumps) can be found in Queens.
 
-Finally, I dropped the fields which either provided a constant information or which I considered irrelevant for answering the problem statement. I then saved the cleaned dataset to a new .csv file.
+Finally, I dropped the fields which either provided a constant information or which I considered irrelevant for answering the problem statement. In the end, I had a dataset with one attribute of individual street tree IDs, 31 features describing each tree, and 3 targets representing the health condition of a street tree. I then saved the cleaned dataset to a new .csv file.
 
 ### 3. Step: Feature engineering
  
@@ -100,7 +101,7 @@ After loading the preprocessed data, I checked the distribution of the targets (
 
 In the first phase, I experimented with different data sampling strategies and their effect on test model runs (i.e., using various classifiers with their default parameter settings). I initially applied oversampling (a bootstrapping approach) of the imblearn package on the training datasets (see bottom three plots of figure 8). As the oversampling approach did not fully balance all target classes, I additionally tested - among other techniques - the use of SMOTE (synthetic minority over sampling) on the already oversampled training datasets. This did not improve the F1 scores of my test models further. In the end, the use of oversampling alone yielded the highest average of all F1 scores.
 
-In the second phase, I chose those classifiers which were among both the three highest F1 scores and average precision scores for an optimization of the respective hyperparameter settings. More specifically, I then applied a grid-search on the parameters of the LGBMClassifier and the RandomForestClassifier with a sevenfold cross-validation and measured the results with the F1 score. I used small adjustments, to the left and right of each parameter, to arrive at the best performing settings. Once I had tuned these two classifiers, I conducted a test run with the validation dataset (i.e., previously untouched data) to decide on a classifier. I finally chose the LGBMClassifier which had both the highest F1 and average precision scores.
+In the second phase, I chose those classifiers which were among both the three highest F1 scores and average precision scores for an optimization of the respective hyperparameter settings. More specifically, I then applied a grid-search on the parameters of the LGBMClassifier and the RandomForestClassifier with a sevenfold cross-validation and measured the results with the F1 score. I used small adjustments, to the left and right of each parameter, to arrive at the best performing & robust settings. Once I had tuned these two classifiers, I conducted a test run with the validation dataset (i.e., previously untouched data) to decide on a classifier. I finally chose the LGBMClassifier which had both the highest F1 and average precision scores.
 
 With regard to the final hyperparameters, let me elaborate on the robustness of the model. The LGBMClassifier reached a F1 score of 0.76 before the hyperparameter tuning. This metric increased to 0.85 after the grid-search on the training and testing datasets. The optimization thus clearly had an effect. Nonetheless, I eventually did not follow the official recommendations on [parameters tuning](https://lightgbm.readthedocs.io/en/latest/Parameters-Tuning.html) for better accuracy of the LightGBM algorithm entirely. On the one hand, I used the `boosting_type` as recommended and changed it to "dart". I also increased `num_leaves`, but did not define it too high to avoid overfitting. On the other hand, I could not find better results in lowering the `learning_rate`. I instead increased this parameter to a higher setting (= 1.0) than the default value (= 0.1). Further, I stayed at almost the default settings for the `n_estimators`. Overall, if there is a parameter to be set for increasing the performance of this model, I would argue that this has been `boosting_type='dart'`. Since I have fixed the `random_state`, feel free to reproduce my results. 
 
@@ -108,57 +109,38 @@ With regard to the final hyperparameters, let me elaborate on the robustness of 
 
 In the last step, I wanted to try the use of [Voilà](https://github.com/voila-dashboards/voila) and interactive widgets in my modelling Jupyter notebook. The Voilà app included two features based on requirements which I had set myself. Note that these features might neither be novelties nor copies, as there are already a [New York City Street Tree Map](https://tree-map.nycgovparks.org/tree-map/) by the New York City Department of Parks & Recreation itself and several other projects on the NYC street tree data following a [hackathon](https://treescountdatajam.devpost.com/) in 2016 sponsored by the same department.
 
-The first feature, "Tree Map", had to map New York City's boroughs, streets, and street trees. The main idea of the map is to show & filter for the (good, fair, or bad) health condition of street trees. This map also refreshes itself if a user wants to clear previous choices by selecting "All street trees". Figure 10 displays the current version's Tree Map (without the drop-down filter).
+The first feature, "Street Tree Questionnaire", had to offer answer options in drop-down menus to questions resembling the original data gathering process of the New York Street Tree Census. Figure 9 shows the questions, drop-down lists, and a reset button on the left. On the right, an output message is generated depending on the answers. For example, the Voilà app will return the statement `This tree is healthy.` if the LGBMClassifier classifies the tree condition based on the characteristics of the tree to be healthy.
+
+**Figure 9: Street Tree Questionnaire**
+
+![Tree Quest](/images/feature_streettreequest.PNG)
+
+The second feature, "Street Tree Map", had to visualize New York City's boroughs, streets, and street trees. Given a new street (based on the answers to the questionnaire), the user can explore similar street trees in New York City. A dot product of the new tree with all the other trees in the dataset determines a degree of similarity at this point. Moreover, the map allows to filter for all street trees in either a good, fair, or bad health condition. The map can also be cleared if a user wants to undo previous choices by selecting "All street trees". Figure 10 displays the current version's Steet Tree Map.
 
 **Figure 10: Street Tree Map**
 
 ![Tree Map](/images/feature_streettreemap.PNG)
 
-The second feature, "Street Tree Questionnaire", had to offer answer options in drop-down menus to questions resembling the original data gathering process of the New York Street Tree Census. Figure 11 shows the questions, drop-down lists, and a reset button on the left. On the right, an output message is generated depending on the answers. For example, the Voilà app will return the statement `This tree is healthy.` if the LGBMClassifier classifies the tree condition based on the characteristics of the tree to be healthy.
+The following two .gif files present a short demo of the two features.
 
-**Figure 11: Street Tree Questionnaire**
-
-![Tree Quest](/images/feature_streettreequest.PNG)
-
-**Figure 12: Street Tree Questionnaire in action**
+**Figure 11: Street Tree Questionnaire in action**
 
 ![Tree Quest action](/images/feature_streettreequest_giffed.gif)
 
-### Project summary: Results
+**Figure 12: Street Tree Map in action**
+
+![Tree Map action](/images/feature_streettreemap_giffed.gif)
+
+# Project conclusion<a name="Conclusion"></a>
  
- 
-  "n F-measure is the harmonic mean of the precision and recall scores, and provides a more robust overall metric of your results." source 3, p182 (naturallanguageannotationformachinelearning)
- 
- -> Robustness of the model? Discuss the parameters.
- "In statistics, robust is a property that is used to describe a resilience to outliers. More generally, the term robust statistics refers to statistics that are not strongly affected by certain degrees of departures from model assumptions." source (2) p. 111 (machinelearningandsecurity)
- 
- Example: "The algorithm’s performance is relatively robust to the setting of alpha, meaning that setting alpha is not critical for good performance. "
- o reproducible result given a fixed random_state
- MLPClassifier
- o neural networks are sensitive to the choice of parameters ->source, p.130 (introductiontomachinelearningwithpython)
- o "lbfgs', which is quite robust" ->source 2, p.120 (introductiontomachinelearningwithpython)
- o "SGD is also a popular algorithm for training neural networks due to its robustness in the face of noisy updates. That is, it helps you build models that gen‐ eralize well." --> source 4, p. 98 (deeplearning)
- 
- A more appropriate strategy to properly estimate model prediction performance is to use cross-validation (CV), which combines (e.g., averages) multiple prediction errors to measure the expected model performance. CV corrects for the expected stochastic nature of partitioning the training and testing sets and generates a more accurate and robust estimate of the expected model performance. --> source 5, p. 701 (2018_Book_DataScienceAndPredictiveAnalyt)
+The resulting Voilà app offers users to investigate the health condition of street trees in New York City. It also allows to experiment, i.e. to add new street trees, classify their health condition based on visual characteristics, and to discover similar existing street trees in New York. Under the hood, the app leverages a trained LightGBM classifier and the dot product to provide the latter functionalities.
+
+For this project I had to set the requirements for the app myself. I had first plans, but no ideas how to realize them. In addition, I wanted to use packages, such as ipywidgets and Voilà, which I had never applied before. Trying these packages for the first time was definetly of worth, even though I spent some hours understanding how to use them. Seeing what could be done with those new tools then also allowed me to adjust my requirements continously. Moreover, working with the Tree Census data in the course of this project made the domain of urban data science very interesting for me.
+
+Finally, it goes without saying that there is still some room for improvement. In particular, I refer to quality, access, and relevance. For instance, I have not taken multicollinearity into account. However, a dataset with less, uncorrelated features might produce more accurate classifications. Furthermore, the Voilà app currently runs on localhost. A next step could thus be to host the app in a cloud environment. This step could make the app easily accessible. Another point for improvement can be found in the current app design. The features of the app could be redesigned by gathering requirements from and running tests with users from instutitions, such as NYC Parks, directly. The latter approach would then increase the relevancy of the app. This also includes giving the app a name :-)
  
 
-- Summary of results
-Justify the results (used various approach to sampling but none of them proved to be more effective than oversampling.
-
-- Conclusion
-Reflect on the solution. Difficult or interesting aspects of the project.
-
- Time consuming experimentation with various sampling techniques, algorithms and hyperparameter tuning.
-
-Improvement: 
- - The dataset has been one-hot encoded without taking multicollinearity into account. If I had set pandas.get_dummies(drop_first=True), I would have one the one hand avoided multicollinearity. On the other hand, the accuracy of my model would have decreases (as test runs have shown) and I would have had far less features for the modelling step (even though these features are being generated through data that is gathered in the tree surveys anyways.) It can be argued though, if the issue of multicollinearity is relevant to a decision tree or a gradient boosting classifier anyways.
- 
- - I could have chosen another classifier and with the SMOTE data sampling technique.
- 
- - smoother app usage. Other algorithms such as RandomForestClassifier. Make the app less location dependent.
-
-
-## Repository content:<a name="Repository_content"></a>
+# Repository content:<a name="Repository_content"></a>
 TODO: short description of each file.
 
 ```bash
@@ -168,7 +150,7 @@ TODO: short description of each file.
 └── 
 ```
 
-## Software requirements:<a name="Software_requirements"></a>
+# Software requirements:<a name="Software_requirements"></a>
 Please use Python version 3.7.1 & the following packages:
 
 ```bash
@@ -197,7 +179,7 @@ xgboost==1.1.0
 
 I used [pip](https://pip.pypa.io/en/stable/) to install these packages.
 
-## How to run locally:<a name="How_to_run"></a>
+# How to run locally:<a name="How_to_run"></a>
 After cloning this repository, change to its directory in your terminal. Run the following command:
 
 ```bash
@@ -206,7 +188,7 @@ voila <name.ipynb> --ExecutePreprocessor.timeout=180
 
 Your Internet browser should open now. Otherwise follow the instructions in your terminal.
 
-## Acknowledgements, licensing & sources:<a name="Acknowledgements"></a>
+# Acknowledgements, licensing & sources:<a name="Acknowledgements"></a>
 
 The data of the TreesCount! 2015 Street Tree Census is licensed under `CC0: Public Domain`. See further information on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data). This dataset and the data on NYC's streets are publicy available via the NYC OpenData portal.
 
