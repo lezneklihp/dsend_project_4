@@ -151,6 +151,54 @@ It goes without saying that there is still room for improvement. In particular, 
 
 # Repository content:<a name="Repository_content"></a>
 
+```bash
+.
+├── README.md
+├── data
+│   ├── data_eda
+│   │   └── data.csv.gz
+│   ├── data_preprocessed
+│   │   └── features.csv.gz
+│   └── data_raw
+│       ├── nyc_boroughs
+│       │   ├── nyc_geo.dbf
+│       │   ├── nyc_geo.prj
+│       │   ├── nyc_geo.shp
+│       │   ├── nyc_geo.shp.xml
+│       │   ├── nyc_geo.shx
+│       │   └── nyc_geo_iso.xml
+│       ├── nyc_streets
+│       │   ├── geo_export_f311eef5-5969-43eb-a781-39fa54d09b70.prj
+│       │   ├── geo_export_f311eef5-5969-43eb-a781-39fa54d09b70.shp
+│       │   └── geo_export_f311eef5-5969-43eb-a781-39fa54d09b70.shx
+│       └── nyc_trees
+│           └── nyc_tree_census_2015.csv.gz
+├── data_descriptions
+│   ├── nyctreecensus_2015_description.pdf
+│   └── tree_planting_standards.pdf
+├── eda_trees.ipynb
+├── eda_trees_report.html
+├── featureeng_trees.ipynb
+├── images
+│   ├── eda_classimba.png
+│   ├── eda_q1.png
+│   ├── eda_q2.png
+│   ├── eda_q3.png
+│   ├── example_streettree.jpeg
+│   ├── feature_streettreemap.PNG
+│   ├── feature_streettreemap_giffed.gif
+│   ├── feature_streettreequest.PNG
+│   ├── feature_streettreequest_giffed.gif
+│   ├── feeng_corrs.png
+│   ├── feeng_newfeature.png
+│   └── sampling.png
+├── model
+│   ├── lgbm_clf.pkl
+│   └── tuned_lgbm_clf2.pkl
+├── modeling_trees.ipynb
+└── webapp_trees.ipynb
+```
+
 Please refer to the tree structure below and the following description of this repository.
 
 The `data` directory contains three subdirectories. The `data_raw` subdirectory has .dbf, .prj, .shp, .shx, and .xml files for the geographical data of the boroughs and streets of New York City. It also has a .csv file (compressed via gunzip) with the Tree Census data. The `data_eda` subdirectory also has a compressed .csv file, but with a cleaned version of the Tree Census dataset. The `data_preprocessed` subdirectory then has a compressed .csv file of a one-hot encoded version of the cleaned dataset.
@@ -169,13 +217,6 @@ The .ipynb scripts include the code for this project. I decided to create multip
 - `webapp_trees.ipynb`: [5. Step](#App)
 
 The remaining files are a .html file with the Pandas Profiling report from the [2. Step](#EDA) and this ReadMe itself. Overall this repository had a size of about 380 MB on my machine.
-
-```bash
-.
-├── README.md
-├── 
-└── 
-```
 
 # Software requirements:<a name="Software_requirements"></a>
 
