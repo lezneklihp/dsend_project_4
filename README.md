@@ -71,7 +71,7 @@ For the geographical anaylsis I answered the following questions:
 
 > The majority of street trees in New York are healthy. The most unhealthy trees (i.e., trees with a poor or fair health condition or dead trees or stumps) can be found in Queens.
 
-Finally, I dropped the fields which either provided a constant information or which I considered irrelevant for answering the problem statement. In the end, I had a dataset with one attribute of individual street tree IDs, 31 features describing each tree, and 3 targets representing the health condition of a street tree. I then saved the cleaned dataset to a new .csv file.
+Finally, I dropped the fields which either provided a constant information or which I considered irrelevant for answering the problem statement. In the end, I had a dataset with one attribute of individual street tree IDs, 31 features describing each tree, and 3 targets representing the health condition of a street tree. This dataset encompassed 683788 entries with data on street trees of New York City. I then saved the cleaned dataset to a new .csv file.
 
 ### 3. Step: Feature engineering<a name="Featureeng"></a>
  
@@ -101,15 +101,17 @@ After loading the preprocessed data, I splitted the data into a training, testin
 
 ![Distribution](/images/sampling.png)
 
-In the first phase, I prepared a spectrum of classifiers for experimentation. These classifiers were the RandomForestClassifier (less prone to overfitting), three boosting frameworks (AdaBoostClassifier, XGBClassifier and LGBMClassifier), and a neural network (MLPClassifier).
+In the first phase, I prepared a spectrum of classifiers for experimentation. These classifiers were the RandomForestClassifier, three boosting frameworks (AdaBoostClassifier, XGBClassifier and LGBMClassifier), a linear model (LogisticRegression) and a neural network (MLPClassifier). I focused on boosting because I wanted to emphasize accurate results.
 
-I then experimented with different data sampling strategies and their effect on test model runs (i.e., using various classifiers with their default parameter settings on only the training and testing datasets). I initially applied oversampling (a bootstrapping approach) of the imblearn package on the training datasets (see bottom three plots of figure 8). As the oversampling approach did not fully balance all target classes, I additionally tested - among other techniques - the use of SMOTE (synthetic minority over sampling) on the already oversampled training datasets. This did not improve the F1 scores of my test models further. In the end, the use of oversampling alone yielded the highest average of all F1 scores.
+I then experimented with different data sampling strategies and their effect on test model runs (i.e., using various classifiers with their default parameter settings on only the training and testing datasets). I initially applied oversampling (a bootstrapping approach) of the imblearn package on the training datasets (see bottom three plots of figure 8). As the oversampling approach did not fully balance all target classes, I additionally tested - among other techniques - the use of SMOTE (synthetic minority over sampling) on the already oversampled training dataset. This procedure did not improve the F1 scores of my test models further. In the end, the use of oversampling alone yielded the highest average of all F1 scores.
 
-In the second phase, I proceeded with the LGBMClassifier which had both 1) the highest F1 score on the least balanced target `health_Poor|Fair` (0.32) and 2) the overall highest average precision score (about 0.72). As a benchmark, I used a linear model, LogisticRegression, which had a better overall f1 score (0.78) and slightly worse average precision score (about 0.72).
+In the second phase, I proceeded with the LGBMClassifier which had both 1) the highest F1 score on the least balanced target `health_Poor|Fair` (0.32) and 2) the overall highest average precision score (about 0.72). As a benchmark, I chose LogisticRegression, which had a better overall f1 score (0.78) and slightly worse average precision score (about 0.72). I selected a linear model as a benchmark because they are commonly considered to be good for large datasets (Mueller & Guido, 2017).
 
-I applied a grid-search on the parameters of the LGBMClassifier with a sevenfold cross-validation and measured the results with the overall F1 score. I used small adjustments, to the left and right of each parameter, to arrive at the best performing & robust settings. Once I had tuned these two classifiers, I conducted a test run with the validation dataset (i.e., previously untouched data) to decide on a classifier. I finally chose the LGBMClassifier because it had both the highest F1 (0.77) and average precision scores (0.67).
+Subsequently, I applied a grid-search on the parameters of these two classifiers with a sevenfold cross-validation and measured the results with the overall, weighted F1 score. I used small adjustments, to the left and right of each parameter, to arrive at the best performing & robust settings.
 
-With regard to the final hyperparameters, let me elaborate on the robustness of the model. The LGBMClassifier reached an overall F1 score of 0.76 before the hyperparameter tuning. This metric increased to 0.85 after the grid-search on the training and testing datasets. The optimization thus clearly had an effect. Nonetheless, I eventually did not follow the official recommendations on [parameters tuning](https://lightgbm.readthedocs.io/en/latest/Parameters-Tuning.html) for better accuracy of the LightGBM algorithm entirely. On the one hand, I used the `boosting_type` as recommended and changed it to "dart". I also increased `num_leaves`, but did not define it too high to avoid overfitting. On the other hand, I could not find better results in lowering the `learning_rate`. I instead increased this parameter to a higher setting (= 1.0) than the default value (= 0.1). Further, I stayed at almost the default settings for the `n_estimators`. Overall, if there is a parameter to be set for increasing the performance of this model, I would argue that this has been `boosting_type='dart'`. Since I have fixed the `random_state`, feel free to reproduce my results. 
+Once I had tuned these two classifiers, I conducted a test run with the validation dataset (i.e., previously untouched data) to decide on a classifier. I finally chose the LGBMClassifier because it had an overall F1 score (0.776) slightly worse than the benchmark's F measure (0.781), but an average precision score (0.6797) which was a bit better than the benchmark's average precision score (0.6796).
+
+With regard to the final hyperparameters, let me elaborate on the robustness of the model. The LGBMClassifier reached an overall F1 score of 0.77 before the hyperparameter tuning. This metric increased to 0.88 after the grid-search on the training and testing datasets. The optimization thus clearly had an effect. Nonetheless, I eventually did not follow the official recommendations on [parameters tuning](https://lightgbm.readthedocs.io/en/latest/Parameters-Tuning.html) for better accuracy of the LightGBM algorithm entirely. On the one hand, I used the `boosting_type` as recommended and changed it to "dart". I also increased `num_leaves` (= 130), but did not define it too high to avoid overfitting. On the other hand, I could not find better results in lowering the `learning_rate`. I instead increased this parameter to a higher setting (= 0.95) than the default value (= 0.1). Further, I stayed at almost the default settings for the `n_estimators` (= 90). Overall, if there is a parameter to be set for increasing the performance of this model, I would argue that this has been `boosting_type='dart'`. Since I have fixed the `random_state`, feel free to reproduce my results. 
 
 ### 5. Step: Voila Web Application<a name="App"></a>
 
@@ -121,7 +123,7 @@ The first feature, "Street Tree Questionnaire", had to offer answer options in d
 
 ![Tree Quest](/images/feature_streettreequest.PNG)
 
-The second feature, "Street Tree Map", had to visualize New York City's boroughs, streets, and street trees. Given a new street (based on the answers to the questionnaire), the user can explore similar street trees in New York City. A dot product of the new tree with all the other trees in the dataset determines a degree of similarity at this point. Moreover, the map allows to filter for all street trees in either a good, fair, or bad health condition. The map can also be cleared if a user wants to undo previous choices by selecting "All street trees". Figure 10 displays the current version's Steet Tree Map.
+The second feature, "Street Tree Map", had to visualize New York City's boroughs, streets, and street trees. Given a new street tree (based on the answers to the questionnaire), the user can explore similar street trees in New York City. The cosine similarity of the new tree with all the other trees in the dataset determines a degree of similarity at this point. Moreover, the map allows to filter for all street trees in either a good, fair, or bad health condition. The map can also be cleared if a user wants to undo previous choices by selecting "All street trees". Figure 10 displays the current version's Steet Tree Map.
 
 **Figure 10: Street Tree Map**
 
@@ -137,13 +139,15 @@ The following two .gif files present a short demo of the two features.
 
 ![Tree Map action](/images/feature_streettreemap_giffed.gif)
 
+In figure 11, the user provides answers to the questionnaire and receives a classification of the new street tree's health condition. In figure 12, the user then asks for similar street trees. They are visualized as black circles on the map.
+
 # Project conclusion<a name="Conclusion"></a>
  
-The resulting Voilà app offers users to investigate the health condition of street trees in New York City. It also allows to experiment, i.e. to add new street trees, classify their health condition based on visual characteristics, and to discover similar existing street trees in New York. Under the hood, the app leverages a trained LightGBM classifier (with a F1-score of 0.77 on a validation dataset) and the dot product to provide the latter functionalities.
+The resulting Voilà app offers users to investigate the health condition of street trees in New York City. It also allows to experiment, i.e., to add new street trees, classify their health condition based on visual characteristics, and to discover similar existing street trees in New York. Under the hood, the app leverages a trained LightGBM classifier (with an overall, weighted F1-score of 0.77 on a validation dataset) and cosine similarity to provide the latter functionalities.
 
 For this project I had to set the requirements for the app myself. I had first plans, but no ideas how to realize them. In addition, I wanted to use packages, such as ipywidgets and Voilà, which I had never applied before. Trying these packages for the first time was definetly of worth, even though I spent some hours understanding how to use them. Seeing what could be done with those new tools then also allowed me to adjust my requirements continously. Moreover, working with the Tree Census data in the course of this project made the domain of urban data science very interesting for me.
 
-It goes without saying that there is still room for improvement. In particular, I refer to quality, access, speed, and relevance. For instance, I have not taken multicollinearity into account. However, a dataset with less, uncorrelated features might produce more accurate classifications. Furthermore, the Voilà app currently runs on localhost. A next step could thus be to host the app in a cloud environment. This step could make the app easily accessible. Developing the app with other frameworks such as Flask could further increase the performance of the app. At the moment, especially the Street Tree Map requires a bit of patience when using this feature. Another point for improvement can be found in the current app design. The features of the app could be redesigned by gathering requirements from and running tests with users from instutitions, such as NYC Parks, directly. The latter approach would then increase the relevancy of the app. This also includes giving the app a name :-)
+It goes without saying that there is still room for improvement. In particular, I refer to quality, access, speed, and relevance. For instance, I have not taken multicollinearity into account. However, a dataset with less, uncorrelated features might produce more accurate classifications. Furthermore, the Voilà app currently runs on localhost. A next step could thus be to host the app in a [cloud environment](https://voila.readthedocs.io/en/stable/deploy.html#cloud-service-providers). This step could make the app easily accessible. Developing the app with other frameworks, such as Flask, could further increase the performance of the app. At the moment, especially the Street Tree Map requires a bit of patience when using this feature. Another point for improvement can be found in the current app design. The features of the app could be redesigned by gathering requirements from and running tests with users from instutitions, such as NYC Parks, directly. The latter approach would then increase the relevancy of the app. This also includes giving the app a name :-)
 
 # Repository content:<a name="Repository_content"></a>
 
@@ -159,7 +163,7 @@ The `model` directory contains the trained classifier in a .pkl file. This file 
 
 The .ipynb scripts include the code for this project. I decided to create multiple .ipynb files for the various steps to reduce the load on memory of my machine. The .ipynb files cover the following steps respectively:
 
-- `eda_trees.ipynb`: [1. Step](#Analysis) and [2. Step](#EDA)
+- `eda_trees.ipynb`: [1. Step](#Load) and [2. Step](#EDA)
 - `featureeng_trees.ipynb`: [3. Step](#Featureeng)
 - `modeling_trees.ipynb`: [4. Step](#Model)
 - `webapp_trees.ipynb`: [5. Step](#App)
@@ -211,10 +215,12 @@ After cloning this repository, change to its directory in your terminal. Run the
 voila webapp_trees.ipynb --ExecutePreprocessor.timeout=180
 ```
 
-The flag here serves to avoid a too early timeout. Your Internet browser should open now. I used Google Chrome. Otherwise follow the instructions in your terminal. Alternatively you can open the `webapp_trees.ipynb` with Jupyter and use the 'Voilà' button instead.
+The flag here serves to avoid a too early timeout. Your Internet browser should open now. I used Google Chrome. Otherwise follow the instructions in your terminal. Alternatively you can open the `webapp_trees.ipynb` via Jupyter and use the 'Voilà' button instead.
 
-# Acknowledgements, licensing & sources:<a name="Acknowledgements"></a>
+# Licensing, acknowledgements & references:<a name="Acknowledgements"></a>
 
 The data of the TreesCount! 2015 Street Tree Census is licensed under `CC0: Public Domain`. See further information on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data). Both this dataset as well as the [dataset on NYC's streets](https://data.cityofnewyork.us/City-Government/NYC-Street-Centerline-CSCL-/exjm-f27b) are publicy available via the NYC OpenData portal.
 
 This is the final project of the Udacity Data Scientist for Enterprise Nanodegree. I therefore want to take the opportunity and thank Vodafone for supporting my participation in this course.
+
+Mueller, A. C., & Guido, S. (2017). *Introduction to Machine Learning with Python*. O'Reilly.
