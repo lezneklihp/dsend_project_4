@@ -151,6 +151,8 @@ It goes without saying that there is still room for improvement. In particular, 
 
 # Repository content:<a name="Repository_content"></a>
 
+Please refer to the tree structure below and the following description of this repository.
+
 ```bash
 .
 ├── README.md
@@ -198,8 +200,6 @@ It goes without saying that there is still room for improvement. In particular, 
 ├── modeling_trees.ipynb
 └── webapp_trees.ipynb
 ```
-
-Please refer to the tree structure below and the following description of this repository.
 
 The `data` directory contains three subdirectories. The `data_raw` subdirectory has .dbf, .prj, .shp, .shx, and .xml files for the geographical data of the boroughs and streets of New York City. It also has a .csv file (compressed via gunzip) with the Tree Census data. The `data_eda` subdirectory also has a compressed .csv file, but with a cleaned version of the Tree Census dataset. The `data_preprocessed` subdirectory then has a compressed .csv file of a one-hot encoded version of the cleaned dataset.
 
