@@ -5,7 +5,7 @@
 - [Repository content](#Repository_content)
 - [Software requirements](#Software_requirements)
 - [How to run locally](#How_to_run)
-- [Acknowledgements & licensing](#Acknowledgements)
+- [Licensing, acknowledgements & references](#Acknowledgements)
 
 # Project definition<a name="Definition"></a>
 
@@ -265,5 +265,5 @@ The data of the TreesCount! 2015 Street Tree Census is licensed under `CC0: Publ
 This is the final project of the Udacity Data Scientist for Enterprise Nanodegree. I therefore want to take the opportunity and thank Vodafone for supporting my participation in this course. Please feel free to work with the results of this project!
 
 **References**
-Mueller, A. C., & Guido, S. (2017). *Introduction to Machine Learning with Python*. O'Reilly.
-Raschka, S., & Mirjalili, V. (2017). *Python Machine Learning*. Packt.
+- Mueller, A. C., & Guido, S. (2017). *Introduction to Machine Learning with Python*. O'Reilly.
+- Raschka, S., & Mirjalili, V. (2017). *Python Machine Learning*. Packt.
