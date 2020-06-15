@@ -146,8 +146,10 @@ The following two .gif files present a short demo of the two features.
 In figure 11, the user provides answers to the questionnaire and receives a classification of the new street tree's health condition. In figure 12, the user then asks for similar street trees. They are visualized as black circles on the map.
 
 # Project conclusion<a name="Conclusion"></a>
- 
-The resulting Voilà app offers users to investigate the health condition of street trees in New York City. It also allows to experiment, i.e., to add new street trees, classify their health condition based on visual characteristics, and to discover similar existing street trees in New York. Under the hood, the app leverages a trained LightGBM classifier (with an overall, weighted F1-score of 0.77 on a validation dataset) and cosine similarity to provide the latter functionalities.
+
+In this project, I wanted to understand whether it is possible to use a machine learning to accurately assess the health condition of street trees with the help of data on their visual characteristics. With an imbalanced dataset of the last Tree Census of the City of New York, I could leverage the information by volunteers on the appearance of street trees and the assessments of their health condition in a LightGBM classifier. **This model eventually did not fully accurately classify the health condition of all street trees (weighted F1 score of 0.77 on a validation dataset)**. 
+
+Nevertheless, the resulting Voilà app - based on this model - offers users to investigate the overall health condition of street trees in New York City. It also allows to experiment, i.e., to add new trees, classify their health condition based on visual characteristics, and to discover similar existing street trees in New York in terms of their cosine similarity.
 
 For this project I had to set the requirements for the app myself. I had first plans, but no ideas how to realize them. In addition, I wanted to use packages, such as ipywidgets and Voilà, which I had never applied before. Trying these packages for the first time was definetly of worth, even though I spent some hours understanding how to use them. Seeing what could be done with those new tools then also allowed me to adjust my requirements continously. Moreover, working with the Tree Census data in the course of this project made the domain of urban data science very interesting for me.
 
