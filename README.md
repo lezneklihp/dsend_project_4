@@ -23,9 +23,9 @@ But classifying trees by their appearance can become tricky. Or how would you as
 
 ![Example_tree](/images/example_streettree.jpeg)
 
-The tree itself looks healthy. But the wires cutting through the tree crown seem to impede its development. **If you did this short self-experiment with others as well, you will have noticed people can perceive the same tree differently.** Yet city councils could make use of an objective assessment whether a street tree is in a good or bad health condition.
+The tree itself looks healthy. But the wires cutting through the tree crown seem to impede its development. **If you did this short self-experiment with others as well, you will have noticed people can perceive the same tree differently.** Nonetheless, city councils could make use of an objective assessment whether a street tree is in a good or bad health condition.
 
-For example, a city might decide to plant new trees in areas with many street tree stumps. Such an assessment could be offered through a classification system based on machine learning. It would take the information on the characteristics of each tree, as provided by the Tree Census data, learn which of these characterstics have been associated with which health condition, and finally classify each street tree either as a tree in a good, fair, or bad health condition. This classification system should then be easy to interact with, even for previously unknown street trees. This ready to use access could be provided by a web application.
+For example, a city might decide to plant new trees in areas with many street tree stumps. Such an assessment could be offered through a classification system based on machine learning. It would take the information on the characteristics of each tree, as provided by the Tree Census data, learn which of these characterstics have been associated with which health condition, and finally classify each street tree either as a tree in a good, fair, or bad health condition. This classification system should then be easy to interact with, even for previously unknown street trees. Such a ready to use access could be provided by a web application.
 
 ### Metrics
 
