@@ -103,7 +103,7 @@ In the first phase, I tried two classifiers along with various data sampling tec
 
 ![Distribution](/images/sampling.png)
 
-These two classifiers were a boosting framework (LGBMClassifier) and a linear model (LogisticRegression). I primarily chose a boosting algorithm because I wanted to emphasize accurate results. Gradient boosting frameworks arguably offer better results than, for example, random forests, whereas linear models are considered to perform well on large datasets (Mueller & Guido, 2017).
+The two classifiers were a boosting framework (LGBMClassifier) and a linear model (LogisticRegression). I primarily chose a boosting algorithm because I wanted to emphasize accurate results. Gradient boosting frameworks arguably offer better results than, for example, random forests, whereas linear models are considered to perform well on large datasets (Mueller & Guido, 2017). LightGBM became my preference over other boosting frameworks, such as XGBoost, due to its leaf-wise approach.
 
 I then experimented with different data sampling strategies and measured their effect on test model runs (i.e., fitting the two classifiers with their default parameters). In light of the imbalanced data, I initially applied oversampling (a bootstrapping approach) of the imblearn package on the training datasets (see bottom three plots of figure 8 above). As the oversampling approach did not fully balance all target classes, I additionally tried - among other techniques - the use of SMOTE (synthetic minority over sampling) on the already oversampled training dataset. This procedure did not improve the F1 scores of my test models. In the end, the use of oversampling alone yielded the highest average of all F1 scores. Nonetheless, a comparison of my metrics on the training datasets alone as well as on the training and testing datasets indicated that both models had started to overfit due to the oversampled training data. As a consequence, I decided to not use any of imblearn's sampling techniques in the next phase. Instead, I wanted to try setting the `class_weight` parameters in both classifiers to 'balanced' which is another balancing approach "to assign a larger penalty to wrong predictions on the minority class" (Raschka & Mirjalili, 2017, p. 186).
 
@@ -242,7 +242,6 @@ scikit-learn==0.22,
 seaborn==0.9.0,
 Shapely==1.7.0,
 voila==0.1.21,
-xgboost==1.1.0
 ```
 
 I used [pip](https://pip.pypa.io/en/stable/) to install these packages.
