@@ -265,7 +265,7 @@ The flag here serves to avoid a too early timeout. Your Internet browser should 
 # Licensing, acknowledgements & references:<a name="Acknowledgements"></a>
 
 #### **Licensing**
-The data of the TreesCount! 2015 Street Tree Census is licensed under `CC0: Public Domain`. See further information on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data). Both this dataset as well as the [dataset on NYC's streets](https://data.cityofnewyork.us/City-Government/NYC-Street-Centerline-CSCL-/exjm-f27b) are publicy available via the NYC OpenData portal.
+The data of the TreesCount! 2015 Street Tree Census is licensed under `CC0: Public Domain`. See further information on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data). Both the [tree dataset](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh) as well as the [dataset on NYC's streets](https://data.cityofnewyork.us/City-Government/NYC-Street-Centerline-CSCL-/exjm-f27b) are publicy available via the NYC OpenData portal.
 
 #### **Acknowledgements**
 This is the final project of the Udacity Data Scientist for Enterprise Nanodegree. I therefore want to take the opportunity and thank Vodafone for supporting my participation in this course. Please feel free to work with the results of this project!
