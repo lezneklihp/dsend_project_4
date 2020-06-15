@@ -11,7 +11,7 @@
 
 ### Overview & motivation
 
-Think of trees in urban areas and you might imagine trees in parks, along riverbanks, or in backyards. But have you also thought about street trees? This project is all about them. I stumbled upon this topic searching for a dataset on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data). The City of New York has made there its Tree Census 2015 data on street trees of NYC publicy available. The topic domain is thus data science in the context of urban decision-making - a field for generating insights with a potential effect on everyday life.
+Think of trees in urban areas and you might imagine trees in parks, along riverbanks, or in backyards. But have you also thought about street trees? This project is all about them. I stumbled upon this topic searching for a dataset on [Kaggle](https://www.kaggle.com/new-york-city/ny-2015-street-tree-census-tree-data). The City of New York has made there its Tree Census 2015 data on street trees of NYC publicy available. The topic domain is thus data science in the context of urban decision-making; a field for generating insights with a potential effect on everyday life.
 
 ### Problem statement
 
